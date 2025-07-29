@@ -22,7 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
     */
   function updateChart() {
     const selectedMetric = select.value;
-    fetch('/data/countries.json')
+    const isGithubPages = window.location.hostname.includes('github.io');
+    const baseUrl = isGithubPages ? "https://jwilson232.github.io/dcr-javascript-test/data/countries.json" : '/data/countries.json';
+
+    fetch(baseUrl)
       .then(res => res.json())
       .then(countries => {
         if (!selectedMetric) return;
